@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shopapp/common/signin_form.dart';
+import 'package:shopapp/common/social-media-card.dart';
 import 'package:shopapp/constants.dart';
 import 'package:shopapp/size_config.dart';
 
@@ -12,64 +14,58 @@ class SignInScreenBody extends StatelessWidget {
         child: Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: Column(
-            children: <Widget>[
-              Text("Welcom Back",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: getProportionateScreenWidth(20),
-                      fontWeight: FontWeight.bold)),
-              Text(
-                "Sign in with your email and password\nor continue with social media",
-                textAlign: TextAlign.center,
-              ),
-              SignInForm()
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: SizeConfig.screenHeight * 0.04),
+                Text("Welcom Back",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: getProportionateScreenWidth(20),
+                        fontWeight: FontWeight.bold)),
+                Text(
+                  "Sign in with your email and password\nor continue with social media",
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: SizeConfig.screenHeight * 0.08),
+                SignInForm(),
+                SizedBox(height: SizeConfig.screenHeight * 0.08),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SocialMediaCard(
+                      svgIcon: "assets/icons/google-icon.svg",
+                      press: () {},
+                    ),
+                    SocialMediaCard(
+                      svgIcon: "assets/icons/facebook-2.svg",
+                      press: () {},
+                    ),
+                    SocialMediaCard(
+                      svgIcon: "assets/icons/twitter.svg",
+                      press: () {},
+                    )
+                  ],
+                ),
+                SizedBox(height: getProportionateScreenHeight(20)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Don't have an account?",
+                        style: TextStyle(
+                            fontSize: getProportionateScreenWidth(16))),
+                    Text("Sign Up",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontSize: getProportionateScreenWidth(16)))
+                  ],
+                ),
+                SizedBox(height: getProportionateScreenHeight(20)),
+              ],
+            ),
           ),
         ),
       ),
     );
-  }
-}
-
-class SignInForm extends StatefulWidget {
-  @override
-  _SignInFormState createState() => _SignInFormState();
-}
-
-class _SignInFormState extends State<SignInForm> {
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(
-                labelText: "Email",
-                hintText: "Enter your email",
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                suffixIcon: CustomSuffixIcon(
-                  svgIcon: "assets/icons/Mail.svg",
-                )),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class CustomSuffixIcon extends StatelessWidget {
-  const CustomSuffixIcon({
-    Key key,
-    this.svgIcon,
-  }) : super(key: key);
-  final String svgIcon;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(0, getProportionateScreenWidth(20),
-            getProportionateScreenWidth(20), getProportionateScreenWidth(20)),
-        child: SvgPicture.asset(svgIcon,
-            height: getProportionateScreenHeight(18)));
   }
 }
